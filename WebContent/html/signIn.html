@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<script>
+    function setDisable(button) {
+        button.disabled = true;
+        button.style.backgroundColor = "rgb(79, 125, 179)";
+        button.style.color = "rgb(177, 177, 177)";
+    }
+    function setInable(button)
+    {
+        button.disabled = false;
+        button.style.backgroundColor = "#1074E7";
+        button.style.color = "white";
+    }
+    function judgeUserName() {
+        var username = document.forms["signUp"]["user"].value;
+
+        if (username.length < 6 || username.length > 18) {
+            document.getElementById("usernameErr").innerHTML = "用户名长度6-18个字符";
+            setDisable(document.getElementById("sub"));
+        }
+        else {
+            document.getElementById("usernameErr").innerHTML = "";
+            setInable(document.getElementById("sub"));
+        }
+    }
+
+    function judgePasswordAgain() {
+        var password1 = document.forms["signUp"]["password"].value;
+        var password2 = document.forms["signUp"]["password_again"].value;
+
+        if (password1 != null && password2 != null && password1 != password2) {
+            document.getElementById("passwordErr").innerHTML = "两次输入的密码不相同";
+            setDisable(document.getElementById("sub"));
+        }
+        else {
+            document.getElementById("passwordErr").innerHTML = "";
+            setInable(document.getElementById("sub"));
+        }
+    }
+</script>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" type="text/css" href="../css/LoginandSignUp.css">
+    <title>
+        注册新用户
+    </title>
+</head>
+
+<body>
+    <br><br><br><br>
+    <div class="main">
+        <div class="little">
+            加入我们
+        </div>
+        <div class="headtitle1">
+            <h1>建立新账号</h1>
+        </div>
+        <div class="form">
+            <form name="signUp" action="../jsp/SignUp.jsp">
+                用户名<span style="color: red;">*</span><br>
+                <input class="text" type="text" name="user" oninput="judgeUserName()" onclick="judgeUserName()"><br>
+                <p id="usernameErr" style="color: rgb(155, 10, 10);"></p>
+                密码
+                <span style="color: red;">*</span><br>
+                <input class="text" type="password" name="password"><br>
+                重复密码<span style="color: red;">*</span><br>
+                <input class="text" type="password" name="password_again" oninput="judgePasswordAgain()"><br>
+                <p id="passwordErr" style="color: rgb(155, 10, 10);"></p>
+                <input id="sub" class="submit" type="submit" value="注册">
+            </form>
+            <p>已经有帐号了？ <a href="/LibManager/jsp/Login.jsp">去登陆</a></p>
+        </div>
+       
+    </div>
+
+    
+    </div>
+</body>
+
+</html>
